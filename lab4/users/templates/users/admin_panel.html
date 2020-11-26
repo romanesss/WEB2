@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+{% extends "catalog/index.html" %}
+{% load static %}
+{% block title %}Admin Panel{% endblock title %}
+{% block content %}
+    <ul>
+        <li> <a href="{% url 'catalog:product_add' %}"> new product</a> </li>
+{% endblock content %}

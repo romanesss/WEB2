@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends "catalog/index.html" %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+{% block content %}
+<div class="user-detail">
+  <div class="detail-item-text">
+      <p>{{ request.user.email }}</p>
+      <p>{{ request.user.first_name }}</p>
+      <p>{{ request.user.last_name }}</p>
+      <p>{{ profile.phone_number }}</p>
+  </div>
+
+  <div class="detail-item-image">
+      <img src="{{ profile.avatar.url }}" alt="avatar" />
+  </div>
+</div>
+{% endblock content %}
+
+
+
+
+

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% extends "catalog/index.html" %}
+{% load static %}
+{% block title %}comment Update{% endblock title %}
+{% block content %}
+<div class="form-container">
+  <h3> Comment Edit</h3>
+  <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="update">
+  </form>
+</div>
+{% endblock content %}

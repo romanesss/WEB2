@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends "catalog/index.html" %}
+{% load static %}
+{% block title %}User Cart{% endblock title %}
+{% block content %}
+    <div class="user-cart">
+        {% for cart_item in cart.cartitem_set.all %}
+            <div class="cart-item">
+                <div class="cart-item-image-frame">
+                    <img src="{{ cart_item.product.image.url }}" />
+                </div>
+                <div class="cart-item-text">
+                    <p> {{ cart_item.product.title }} </p>
+                </div>
+                <div class="cart-item-price">
+                    <p> {{ cart_item.product.price }}</p>
+                </div>
+                <div class="cart-item-quantity">
+                    <p> {{ cart_item.quantity }}</p>
+                </div>
+                <div class="cart-item-total">
+                    <p> {{ cart_item.get_total }}</p>
+                    <p> <a href="{% url 'sale:cart_item_update' cart_item.id %}"> update </a> </p>
+                    <p> <a href="{% url 'sale:cart_item_delete' cart_item.id %}"> delete </a> </p>
+                </div>
+            </div>
+        {% endfor %}
+        <p class="cart-total"> Total = {{ cart.get_total }} Rials</p>
+    </div>
+{% endblock content %}

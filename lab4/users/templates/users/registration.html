@@ -1,0 +1,13 @@
+{% extends "catalog/index.html" %}
+{% load static %}
+{% block title %}Registration{% endblock title %}
+{% block content %}
+<div class="form-container">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="submit">Register</button>
+        <p><a href="{% url 'users:login' %}">Login</a></p>
+    </form>
+</div>
+{% endblock content %}

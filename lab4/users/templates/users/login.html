@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% extends "catalog/index.html" %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+{% block content %}
+<div class="form-container">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="submit">Login</button>
+        <p class="address"><a href="{% url 'users:registration' %}">Sing up</a></p>
+    </form>
+</div>
+{% endblock content %}
