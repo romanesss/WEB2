@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  web:
+    build: ./
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./shopdj/:/Users/university_rep/app/shopdj
+    ports:
+      - 8000:8000
+  redis:
+    image: redis
+    command: ["sh", "-c", "exec redis-server --requirepass \"${REDIS_PASSWORD}\""]

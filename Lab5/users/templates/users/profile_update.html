@@ -1,0 +1,12 @@
+{% extends "catalog/index.html" %}
+{% load static %}
+{% block title %}Profile Update{% endblock title %}
+{% block content %}
+  <div class="form-container">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="update">
+    </form>
+  </div>
+{% endblock content %}

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% extends "catalog/index.html" %}
+{% load static %}
+{% block title %}Add to cart{% endblock title %}
+{% block content %}
+<div class="form-container">
+    <p> {{ product.title }} </p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="submit">Add</button>
+    </form>
+</div>
+{% endblock content %}

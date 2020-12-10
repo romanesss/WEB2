@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% extends "catalog/index.html" %}
+{% load static %}
+{% block title %}Product Delete{% endblock title %}
+{% block content %}
+<div class="form-container">
+  <p> are you sure that you want to delete this product?</p>
+  <p> {{ product.title }} </p>
+  <form method="post">
+      {% csrf_token %}
+      <input type="submit" value="delete">
+  </form>
+</div>
+{% endblock content %}

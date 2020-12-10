@@ -1,0 +1,72 @@
+{% extends "catalog/index.html" %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+{% block content %}
+  <div class="product-detail">
+    <div class="detail-item-text">
+      <h1> {{ product.title }} </h1>
+      <p> {{ product.description }}</p>
+      <p> {{ product.price }} rial</p>
+      <p class="add-to-cart"><img src="{% static 'catalog/img/add2cart.png' %}" alt="add to cart" /></p>
+      {% if user.adminprofile_set.all %}
+        <p> <a href="{% url 'product_delete' product.id }%"> remove product </a> </p>
+        <p> <a href="{% url 'catalog:product_update' product.id  %}"> change product</a> </p>
+      {% endif %}
+    </div>
+    <div class="detail-item-image">
+      <img src='{{ product.image.url }}' alt="product" />
+    </div>
+    <div class="comments-container">
+      {% for comment in object_list %}
+        <div class="comment">
+          {% for profile in comment.author.customerprofile_set.all %}
+            <img class="author-image" src="{{ profile.avatar.url }}" alt="avatar" />
+          {% endfor %}
+          <p class="comment-author">
+            {{ comment.author.first_name }} {{ comment.author.last_name }}
+            {% if comment.author == request.user %}
+              <a class="comment-remove" href="{% url 'catalog:comment_delete' comment.id %}"> remove</a>
+              &nbsp;
+              <a class="comment-edit" href="{% url 'catalog:comment_update' comment.id %}"> edit</a>
+            {% endif %}
+          </p>
+          <p class="comment-date"> {{comment.date_posted}} </p>
+          <p class="comment-body">
+            {{comment.text}}
+          </p>
+        </div>
+      {% endfor %}
+
+      {% if is_paginated %}
+        <div class="pagination">
+          {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="pagination-link">&laquo;</a>
+          {% endif %}
+          {% for i in paginator.page_range %}
+            {% if page_obj.number == i %}
+              <a href="#" class="pagination-link blue-text">{{ i }}</a>
+            {% else %}
+              <a href="?page={{ i }}" class="pagination-link">{{ i }}</a>
+            {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="pagination-link">&raquo;</a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+
+
+    </div>
+
+  </div>
+{% if user.is_authenticated %}
+        <div class="form-container">
+          <form method="post" >
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="post">
+          </form>
+        </div>
+      {% endif %}
+{% endblock content %}

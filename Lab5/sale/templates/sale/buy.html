@@ -1,0 +1,20 @@
+{% extends "catalog/index.html" %}
+{% load static %}
+{% block title %}Buy{% endblock title %}
+{% block content %}
+<div class="form-container">
+    {% for cart_item in cart.cartitem_set.all %}
+        <p>
+            {{ cart_item.product.title }}
+            {{ cart_item.product.price }}
+            {{ cart_item.quantity }}
+        </p>
+    {% endfor %}
+    <p> Total = {{ cart.get_total }} Rials</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="pay and buy">
+    </form>
+</div>
+{% endblock content %}
